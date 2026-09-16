@@ -117,7 +117,7 @@ REMOVE_RE = re.compile(
     r"\b(?:nahi|nhi)\b(?=.*\b(?:chahiye|want|need|rakh|keep|add|kar\s*do)\b))",
     re.I,
 )
-ONLY_RE = re.compile(r"\b(?:sirf|only|bas|just|baki\s+dono|baaki\s+dono|rest\s+two|keep\s+only)\b", re.I)
+ONLY_RE = re.compile(r"\b(?:sirf|only|bas|just|baki\s+dono|baaki\s+dono|rest\s+two|keep\s+only|(?:hi|hee)\s+rakh)\b", re.I)
 REPLACE_RE = re.compile(
     r"(?:\b(?:replace|instead|jagah|ki\s+jagah|ke\s+jagah|hata\s+ke|hata\s+kar|nahi\s*,?|nhi\s*,?)\b.*"
     r"\b(?:chahiye|want|need|kar\s+do|kardo|add)\b)",
