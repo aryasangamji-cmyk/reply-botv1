@@ -870,6 +870,11 @@ async def _cart_intent_with_ai(context, production_db_path: str, chat_id: Any, r
                 final_keys.append(k)
         route = bool(data.get("route_to_matcher"))
         confidence = str(data.get("confidence") or "").lower()
+        # Never carry a stale combo into a named-course cart unless the user
+        # explicitly requests that combo in the current message.
+        combo_keys = {"neg_combo:pro_pack", "neg_combo:top_faculty"}
+        if not re.search(r"\b(?:pro\s*pack|top\s*faculty|combo|all\s+coaching)\b", raw, re.I):
+            final_keys = [k for k in final_keys if k not in combo_keys]
         # AI is authoritative for ambiguous multi-course and negative wording;
         # server-side validation below still restricts results to candidates.
         if route and fallback.get("action") in {"REMOVE", "KEEP_ONLY"}:
