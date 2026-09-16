@@ -1994,12 +1994,25 @@ async def process_negotiation_layer(update, context, production_db_path: str, te
             (FAQ_RE.search(raw) or PRICE_QUESTION_RE.search(raw))
             and (state.get("cart") or ref)
         )
+        faq_only = bool(
+            FAQ_RE.search(raw)
+            and not re.search(
+                r"\b(?:chahiye|chahie|want|need|buy|purchase|lena|leni|lunga|lungi|"
+                r"select|choose|add|include|remove|delete|nahi\s+chahiye|replace)\b",
+                raw,
+                re.I,
+            )
+        )
+        if faq_only and not state.get("cart") and not ref:
+            reply = _fallback_context_answer(raw, state) or "Haan bro, demo mein check kar lo."
+            await update.message.reply_text(reply)
+            return True
 
         # If the current message explicitly identifies another saved item, let
         # the mature matcher/selection flow own it instead of forcing the older
         # replied target onto the turn.
         explicit_items = []
-        if not known_active_faq and (SELECTION_RE.search(raw) or _looks_like_new_batch_reference(raw)):
+        if not faq_only and not known_active_faq and (SELECTION_RE.search(raw) or _looks_like_new_batch_reference(raw)):
             explicit_items = _selection_items(production_db_path, raw)
 
         # NEGOTIATION_LIST_AI_V34: interpret list mutation before reply-target
