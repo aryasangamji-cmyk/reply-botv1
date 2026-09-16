@@ -1102,7 +1102,11 @@ def _sync_selection(production_db_path: str, chat_id: Any, text: str, state: dic
     if not items:
         return state, False
     old = list(state.get("cart") or [])
-    if old and ADDITIVE_RE.search(text):
+    # Multi-course wording is inherently additive even when the user does not
+    # say the literal "add" (for example: "dono", "teeno", "both", "all").
+    # Preserve the existing cart so later remove/replace turns have full state.
+    multi_add = bool(re.search(r"\b(?:dono|teeno|teenon|both|all|sabhi|sare|saare)\b", text, re.I))
+    if old and (ADDITIVE_RE.search(text) or multi_add):
         cart = _merge_selected(old, items)
     else:
         cart = items
