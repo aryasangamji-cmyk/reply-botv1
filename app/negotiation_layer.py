@@ -813,7 +813,7 @@ async def _cart_intent_with_ai(context, production_db_path: str, chat_id: Any, r
     client = getattr(ai, "client", None) if ai is not None else None
     model = str(getattr(ai, "model", "") or "") if ai is not None else ""
     if client is None or not model:
-        return fallback
+        return {"action": "NONE", "final_keys": [], "route_to_matcher": False, "confidence": "unavailable"}
     compact_candidates = [{
         "key": str(item.get("key") or ""),
         "name": str(item.get("name") or ""),
@@ -890,8 +890,8 @@ async def _cart_intent_with_ai(context, production_db_path: str, chat_id: Any, r
         # server-side validation below still restricts results to candidates.
         # Never let an indeterminate AI response clear a valid cart or discard
         # a clean candidate selection.
-        if action == "NONE" and fallback.get("action") not in {"NONE", ""}:
-            return fallback
+        if action == "NONE":
+            return {"action": "NONE", "final_keys": [], "route_to_matcher": False, "confidence": confidence or "none"}
         if route and fallback.get("action") in {"REMOVE", "KEEP_ONLY"}:
             return fallback
         if not final_keys and current_keys and action not in {"REMOVE","KEEP_ONLY"}:
@@ -1013,11 +1013,12 @@ async def _handle_cart_edit(update, context, production_db_path: str, chat_id: A
     if not candidates:
         return state, False
     decision = await _cart_intent_with_ai(context, production_db_path, chat_id, raw, state, ref, candidates)
-    if bool(decision.get("route_to_matcher")):
-        return state, False
+    if bool(decision.get("route_to_matcher")) or not (decision.get("final_keys") or []):
+        # AI is the only batch decision-maker. Never fall through to the local
+        # matcher or clear the cart when AI cannot determine a valid intent.
+        await update.message.reply_text("Please share the exact batch name you want.")
+        return state, True
     final_keys = [str(x) for x in (decision.get("final_keys") or []) if str(x)]
-    if not final_keys and state.get("cart"):
-        return state, False
     state = _apply_cart_final_keys(production_db_path, chat_id, state, candidates, final_keys)
     _clear_burst(production_db_path, chat_id)
     old_task = _TASKS.get(str(chat_id))
