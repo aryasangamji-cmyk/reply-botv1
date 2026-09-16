@@ -1,6 +1,6 @@
 import unittest
 
-from app.negotiation_layer import _apply_reference_target, _candidate_mentions, _fallback_cart_intent
+from app.negotiation_layer import _apply_reference_target, _candidate_mentions, _fallback_cart_intent, _fallback_context_answer
 
 
 class CartIntentTests(unittest.TestCase):
@@ -61,6 +61,14 @@ class CartIntentTests(unittest.TestCase):
         )
         self.assertFalse(changed)
         self.assertEqual([x["key"] for x in updated["cart"]], ["a", "b"])
+
+    def test_generic_notes_recordings_question_gets_confirmation(self):
+        reply = _fallback_context_answer(
+            "Lecture notes aur recordings sab rahenge na?",
+            {"original_total": 500, "current_offer": 450},
+        )
+        self.assertIn("Haan", reply)
+        self.assertIn("recordings", reply)
 
 
 if __name__ == "__main__":

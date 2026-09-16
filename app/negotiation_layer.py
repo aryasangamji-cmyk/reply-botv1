@@ -1328,8 +1328,8 @@ def _fallback_context_answer(raw: str, state: dict):
         return f"₹{current}"
     if re.search(r"\b(?:validity|access\s+kab\s+tak|kitne\s+time|how\s+long)\b", n, re.I):
         return "Lifetime"
-    if re.search(r"\b(?:notes?|pdf|material|lecture\s+notes?)\b", n, re.I):
-        return "Bro, demo mein check kar lo."
+    if re.search(r"\b(?:notes?|pdf|material|lecture\s+notes?|recordings?)\b", n, re.I):
+        return "Haan bro, lecture notes aur recordings milenge."
     if re.search(r"\b(?:android|download)\b", n, re.I):
         return "Haan bro, Android phone par lectures download kar sakte ho."
     return None
