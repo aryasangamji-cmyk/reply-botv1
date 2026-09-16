@@ -4180,6 +4180,12 @@ async def token_smart_batch_candidates(path, message, limit=8):
         phrase=1 if _ts_norm(name) and _ts_norm(name) in n else 0
         if not overlap and not phrase: continue
         score=len(overlap)*2+phrase*8
+        # Teacher-name phrases are stronger than a shared subject keyword.
+        qwords=[w for w in re.findall(r"[a-z0-9]+", n) if len(w)>=3]
+        hwords=set(re.findall(r"[a-z0-9]+", hn))
+        teacher_hits=sum(1 for w in qwords if w in hwords)
+        if teacher_hits >= 2:
+            score += 14 + teacher_hits * 2
         # Prefer exact name and longer meaningful overlap.
         if opt_subject: score += 2
         out.append((score,r))
@@ -4200,6 +4206,10 @@ def token_smart_rank_batch_candidates(message, candidates, limit=2):
         overlap=q & hay
         phrase=1 if _ts_norm(name) and _ts_norm(name) in _ts_norm(message) else 0
         score=len(overlap)*2 + phrase*8
+        qwords=[w for w in re.findall(r"[a-z0-9]+", _ts_norm(message)) if len(w)>=3]
+        hwords=set(re.findall(r"[a-z0-9]+", _ts_norm(name+' '+kw)))
+        teacher_hits=sum(1 for w in qwords if w in hwords)
+        if teacher_hits >= 2: score += 14 + teacher_hits * 2
         scored.append((score, len(overlap), r))
     scored.sort(key=lambda x:(x[0],x[1],len(str(x[2].get('name') or ''))), reverse=True)
     return scored[:max(int(limit),1)]
