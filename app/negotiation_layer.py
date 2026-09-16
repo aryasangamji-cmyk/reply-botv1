@@ -656,6 +656,27 @@ def _cart_edit_candidates(production_db_path: str, chat_id: Any, state: dict, ex
         put(item, "recent")
     for item in _current_cart_candidates(state):
         put(item, "current")
+    # The structured matcher can briefly leave only the latest target in the
+    # negotiation cart. Recover other active courses from the saved customer
+    # context so explicit multi-select wording ("dono lunga") is interpreted
+    # with the complete conversation state.
+    try:
+        with _con(production_db_path) as db:
+            row = db.execute(
+                "SELECT active_targets_json FROM unified_customer_context WHERE chat_id=? LIMIT 1",
+                (str(chat_id),),
+            ).fetchone()
+        targets = json.loads(row["active_targets_json"] or "[]") if row else []
+        for target in targets if isinstance(targets, list) else []:
+            if not isinstance(target, dict):
+                continue
+            key = str(target.get("key") or "").strip()
+            name = str(target.get("name") or "").strip()
+            price = _price_int(target.get("price"))
+            if key and name and price > 0:
+                put({"key": key, "name": name, "price": price, "phrases": []}, "saved")
+    except Exception:
+        logger.exception("%s active target candidate recovery failed chat=%s", MARKER, chat_id)
     for item in explicit_items or []:
         key = str(item.get("key") or "").strip()
         if key and key in by_key:
