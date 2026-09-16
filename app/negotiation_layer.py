@@ -780,7 +780,12 @@ def _fallback_cart_intent(raw: str, current_keys: list[str], candidates: list[di
         if REMOVE_RE.search(raw) and current_keys:
             negative_part = re.split(r"\b(?:nahi|nhi)\b", raw, maxsplit=1, flags=re.I)[0]
             removed = set(_candidate_mentions(negative_part, candidates))
-            final = [k for k in current_keys if k not in removed]
+            # When the message starts with “nhi sirf X chahiye”, the
+            # positive clause after “nhi” is an explicit keep-only request.
+            if not negative_part.strip():
+                final = list(dict.fromkeys(mentioned))
+            else:
+                final = [k for k in current_keys if k not in removed]
             for k in mentioned:
                 if k not in removed and k not in final:
                     final.append(k)
