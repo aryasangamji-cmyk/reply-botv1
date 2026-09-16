@@ -82,6 +82,17 @@ class CartIntentTests(unittest.TestCase):
         self.assertEqual(decision["action"], "KEEP_ONLY")
         self.assertEqual(decision["final_keys"], ["geo_optional"])
 
+    def test_dono_optional_add_keeps_both_candidates(self):
+        candidates = [
+            {"key": "basava", "name": "Basava Uppin Sir — Economy", "phrases": ["Basava sir"], "source": "current"},
+            {"key": "geo_optional", "name": "Vision IAS Geography Optional", "phrases": ["optional"], "source": "recent"},
+        ]
+        decision = _fallback_cart_intent(
+            "Basava sir and optional dono lunga", ["basava"], candidates, None,
+        )
+        self.assertEqual(decision["action"], "ADD")
+        self.assertEqual(decision["final_keys"], ["basava", "geo_optional"])
+
 
 if __name__ == "__main__":
     unittest.main()

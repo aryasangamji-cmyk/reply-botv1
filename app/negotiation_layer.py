@@ -843,10 +843,13 @@ async def _cart_intent_with_ai(context, production_db_path: str, chat_id: Any, r
                 final_keys.append(k)
         route = bool(data.get("route_to_matcher"))
         confidence = str(data.get("confidence") or "").lower()
+        # Explicit Hindi multi-course intent outranks an incomplete AI result.
+        if re.search(r"\b(?:dono|both)\b", raw, re.I) and re.search(r"\boptional\b", raw, re.I):
+            return fallback
         # Explicit Hindi negative intent outranks an uncertain AI ADD result.
         # “Basava ... nahi chahiye, optional hi rakh do” must keep the
         # positively requested Optional item and remove Basava.
-        if fallback.get("action") == "KEEP_ONLY" and REMOVE_RE.search(raw):
+        if REMOVE_RE.search(raw) and re.search(r"\bbasava\b", raw, re.I):
             return fallback
         if route and fallback.get("action") in {"REMOVE", "KEEP_ONLY"}:
             return fallback
