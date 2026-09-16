@@ -740,7 +740,19 @@ def _fallback_cart_intent(raw: str, current_keys: list[str], candidates: list[di
         if len(recentish) == 2:
             mentioned = recentish
     if ONLY_RE.search(raw):
-        final = list(dict.fromkeys(mentioned))
+        # In phrases such as “Basava wala nahi chahiye, optional hi rakh do”,
+        # the negative clause identifies the item to remove while the latter
+        # clause identifies the item to keep. Preserve any current item that
+        # is not the explicitly rejected target.
+        if REMOVE_RE.search(raw) and current_keys:
+            negative_part = re.split(r"\b(?:nahi|nhi)\b", raw, maxsplit=1, flags=re.I)[0]
+            removed = set(_candidate_mentions(negative_part, candidates))
+            final = [k for k in current_keys if k not in removed]
+            for k in mentioned:
+                if k not in final:
+                    final.append(k)
+        else:
+            final = list(dict.fromkeys(mentioned))
         action = "KEEP_ONLY"
     elif REMOVE_RE.search(raw) or REPLACE_RE.search(raw):
         action = "REPLACE" if REPLACE_RE.search(raw) else "REMOVE"
@@ -831,6 +843,8 @@ async def _cart_intent_with_ai(context, production_db_path: str, chat_id: Any, r
                 final_keys.append(k)
         route = bool(data.get("route_to_matcher"))
         confidence = str(data.get("confidence") or "").lower()
+        if route and fallback.get("action") in {"REMOVE", "KEEP_ONLY"}:
+            return fallback
         if not final_keys and current_keys and action not in {"REMOVE","KEEP_ONLY"}:
             return fallback
         runtime = ensure_schema(production_db_path)

@@ -70,6 +70,18 @@ class CartIntentTests(unittest.TestCase):
         self.assertIn("Haan", reply)
         self.assertIn("recordings", reply)
 
+    def test_remove_basava_keep_optional_preserves_optional(self):
+        candidates = [
+            {"key": "basava", "name": "Basava Uppin Sir — Economy", "phrases": ["Basava sir"]},
+            {"key": "geo_optional", "name": "Vision IAS Geography Optional", "phrases": ["optional"]},
+        ]
+        decision = _fallback_cart_intent(
+            "Basava sir wala nahi chahiye, optional hi rakh do",
+            ["basava", "geo_optional"], candidates, None,
+        )
+        self.assertEqual(decision["action"], "KEEP_ONLY")
+        self.assertEqual(decision["final_keys"], ["geo_optional"])
+
 
 if __name__ == "__main__":
     unittest.main()
