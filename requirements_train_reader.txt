@@ -1,0 +1,5 @@
+telethon>=1.41.0
+openai>=3.0.0
+aiosqlite>=0.22.0
+python-dotenv>=1.0.0
+python-telegram-bot>=22.8

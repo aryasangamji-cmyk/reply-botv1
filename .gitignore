@@ -1,0 +1,17 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+*.session
+*.session-journal
+app/chat_history_seed.json
+data/*.sqlite3
+data/*.sqlite3-*
+data/media/
+data/main_account.session
+data/admin_workers/
+migration/staging/
+migration/old_database/
+*.log
+*.tar.gz
+*.zip

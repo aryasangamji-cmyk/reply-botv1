@@ -1,0 +1,513 @@
+[
+  {
+    "intent": "What is Top Faculty?",
+    "reply_en": "Whatever is mentioned in the Top Faculty list is part of Top Faculty.",
+    "reply_hi": "Top Faculty ki list mein jo bhi mentioned hai, woh Top Faculty ka part hai.",
+    "trigger": "/topfaculty",
+    "keywords": "what is top faculty|top faculty kya hai|top faculty kya hota hai|top faculty meaning"
+  },
+  {
+    "intent": "What does Top Faculty include?",
+    "reply_en": "Top Faculty includes only the Top Faculty lectures mentioned in the Top Faculty list.",
+    "reply_hi": "Top Faculty mein sirf Top Faculty list mein mentioned lectures included hain.",
+    "trigger": "",
+    "keywords": "top faculty include|top faculty mein kya hai|top faculty me kya milega|top faculty contents"
+  },
+  {
+    "intent": "What does Pro Pack include?",
+    "reply_en": "Pro Pack includes Top Faculty lectures, All Coaching Combo, and one Optional.",
+    "reply_hi": "Pro Pack mein Top Faculty lectures, All Coaching Combo aur ek Optional included hai.",
+    "trigger": "",
+    "keywords": "pro pack include|pro pack mein kya hai|pro pack me kya milega|pro pack contents"
+  },
+  {
+    "intent": "Difference between Top Faculty and Pro Pack",
+    "reply_en": "Top Faculty includes only the Top Faculty lectures mentioned in the Top Faculty list. Pro Pack includes Top Faculty + All Coaching GS + one Optional Combo (one subject).",
+    "reply_hi": "Top Faculty mein sirf Top Faculty list mein mentioned lectures included hain. Pro Pack mein Top Faculty + All Coaching GS + ek Optional Combo (ek subject) included hai.",
+    "trigger": "",
+    "keywords": "difference top faculty pro pack|top faculty aur pro pack difference|top faculty vs pro pack|pro pack vs top faculty"
+  },
+  {
+    "intent": "Top Faculty price",
+    "reply_en": "",
+    "reply_hi": "",
+    "trigger": "/topfaculty",
+    "keywords": "top faculty price|top faculty fee|top faculty kitne ka|top faculty 999"
+  },
+  {
+    "intent": "Pro Pack price",
+    "reply_en": "",
+    "reply_hi": "",
+    "trigger": "/propack",
+    "keywords": "pro pack price|pro pack fee|pro pack kitne ka|pro pack 1499"
+  },
+  {
+    "intent": "₹999 course or batch request",
+    "reply_en": "",
+    "reply_hi": "",
+    "trigger": "/topfaculty",
+    "keywords": "999 course|999 batch|999 wala course|999 mein course|999 me batch"
+  },
+  {
+    "intent": "₹1499 course or batch request",
+    "reply_en": "",
+    "reply_hi": "",
+    "trigger": "/propack",
+    "keywords": "1499 course|1499 batch|1499 wala course|1499 mein course|1499 me batch"
+  },
+  {
+    "intent": "Generic GS lecture request",
+    "reply_en": "",
+    "reply_hi": "",
+    "trigger": "/allcombo",
+    "keywords": "gs lectures|gs lecture chahiye|generic gs|gs classes chahiye"
+  },
+  {
+    "intent": "What things do you provide",
+    "reply_en": "",
+    "reply_hi": "",
+    "trigger": "/allcombo",
+    "keywords": "what do you provide|what things provide|aap kya provide karte ho|kya kya provide karte ho"
+  },
+  {
+    "intent": "Generic UPSC course request",
+    "reply_en": "",
+    "reply_hi": "",
+    "trigger": "/allcombo",
+    "keywords": "upsc course chahiye|upsc classes chahiye|upsc lectures chahiye|upsc batch chahiye"
+  },
+  {
+    "intent": "Generic UPSC package request",
+    "reply_en": "",
+    "reply_hi": "",
+    "trigger": "/allcombo",
+    "keywords": "upsc package|upsc coaching package|complete upsc package|upsc combo package"
+  },
+  {
+    "intent": "Generic combo interest",
+    "reply_en": "",
+    "reply_hi": "",
+    "trigger": "/allcombo",
+    "keywords": "interested in combo|combo chahiye|combo lena hai|combo offer|combo options"
+  },
+  {
+    "intent": "GS plus Optional request",
+    "reply_en": "",
+    "reply_hi": "",
+    "trigger": "/propack",
+    "keywords": "gs plus optional|gs aur optional|gs + optional|gs optional chahiye"
+  },
+  {
+    "intent": "How many groups are in Pro Pack?",
+    "reply_en": "Pro Pack has 18 groups in total, including the Optional.",
+    "reply_hi": "Pro Pack mein total 18 groups hain, Optional ko include karke.",
+    "trigger": "/propack",
+    "keywords": "how many groups pro pack|pro pack groups|pro pack mein kitne groups|pro pack me kitne group|18 groups"
+  },
+  {
+    "intent": "Is the course genuine/authentic?",
+    "reply_en": "Yes, it is genuine.",
+    "reply_hi": "Haan bro, genuine hai.",
+    "trigger": "/proof",
+    "keywords": "genuine course|course genuine hai|genuine hai|authentic course|course authentic hai|authentic hai|genuine authentic"
+  },
+  {
+    "intent": "Proof / demo proof request",
+    "reply_en": "",
+    "reply_hi": "",
+    "trigger": "/proof",
+    "keywords": "show proof|proof dikhao|proof do|what proof|lecture proof|proof of lectures"
+  },
+  {
+    "intent": "Can I download the lectures?",
+    "reply_en": "Yes, you can download the lectures on an Android phone.",
+    "reply_hi": "Haan bro, Android phone par lectures download kar sakte ho.",
+    "trigger": "",
+    "keywords": "download lectures|lectures download|download kar sakta|download kar sakte|android download"
+  },
+  {
+    "intent": "Where are the lectures?",
+    "reply_en": "Lectures are provided through private premium group access.",
+    "reply_hi": "Lectures private premium group access ke through milte hain.",
+    "trigger": "",
+    "keywords": "where lectures|lectures kahan|lecture kaha milega|private group lectures|lectures group mein"
+  },
+  {
+    "intent": "Can I get PRE-access before payment?",
+    "reply_en": "If you want, we can provide PRE-access for five minutes to Top Faculty.",
+    "reply_hi": "Agar aap chaho toh Top Faculty ka five-minute PRE-access de sakte hain.",
+    "trigger": "",
+    "keywords": "pre access before payment|before payment pre|payment se pehle access|pre access chahiye"
+  },
+  {
+    "intent": "Customer confirms PRE-access",
+    "reply_en": "",
+    "reply_hi": "",
+    "trigger": "/pre topfaculty",
+    "keywords": "yes pre access|haan pre access|pre access yes|give pre access|pre access de do"
+  },
+  {
+    "intent": "Add me first then I will pay",
+    "reply_en": "If you want, we can provide PRE-access for five minutes to Top Faculty.",
+    "reply_hi": "Agar aap chaho toh Top Faculty ka five-minute PRE-access de sakte hain.",
+    "trigger": "",
+    "keywords": "add me first then pay|pehle add karo phir pay|first add then payment|access first then payment"
+  },
+  {
+    "intent": "Add me first in Pro Pack",
+    "reply_en": "If you want, we can provide PRE-access for five minutes to Top Faculty.",
+    "reply_hi": "Agar aap chaho toh Top Faculty ka five-minute PRE-access de sakte hain.",
+    "trigger": "",
+    "keywords": "add me first pro pack|pro pack mein pehle add|first add pro pack|pro pack access first"
+  },
+  {
+    "intent": "Why only Top Faculty for PRE-access?",
+    "reply_en": "Pro Pack has 18 groups, so we can provide PRE-access only to Top Faculty.",
+    "reply_hi": "Pro Pack mein 18 groups hain, isliye sirf Top Faculty ka PRE-access de sakte hain.",
+    "trigger": "",
+    "keywords": "why only top faculty pre|sirf top faculty pre|why top faculty only|pre access only top faculty"
+  },
+  {
+    "intent": "One Optional included",
+    "reply_en": "One Optional subject is included in Pro Pack.",
+    "reply_hi": "Pro Pack mein ek Optional subject included hai.",
+    "trigger": "/propack",
+    "keywords": "one optional included|ek optional included|one optional pro pack|select one optional|any one optional|choose one optional"
+  },
+  {
+    "intent": "Optional not included in Top Faculty",
+    "reply_en": "",
+    "reply_hi": "",
+    "trigger": "/propack",
+    "keywords": "optional top faculty mein nahi|top faculty optional not included|top faculty optional nahi"
+  },
+  {
+    "intent": "Additional Optional price",
+    "reply_en": "Additional Optional is ₹500.",
+    "reply_hi": "Additional Optional ₹500 ka hai.",
+    "trigger": "",
+    "keywords": "additional optional price|extra optional price|another optional 500|additional optional 500"
+  },
+  {
+    "intent": "Can I choose Optional later?",
+    "reply_en": "Yes, you can choose the included Optional later anytime without an extra fee.",
+    "reply_hi": "Haan bro, included Optional baad mein kabhi bhi choose kar sakte ho, extra fee nahi lagegi.",
+    "trigger": "",
+    "keywords": "choose optional later|optional baad mein choose|optional later select|later optional"
+  },
+  {
+    "intent": "Customer selects an Optional",
+    "reply_en": "",
+    "reply_hi": "",
+    "trigger": "/propack",
+    "keywords": "i choose optional|my optional is|optional subject is|optional subject chahiye|choose optional subject"
+  },
+  {
+    "intent": "Selected Optional is unavailable",
+    "reply_en": "",
+    "reply_hi": "",
+    "trigger": "/propack",
+    "keywords": "optional unavailable|optional not available|selected optional unavailable|optional nahi hai"
+  },
+  {
+    "intent": "UPI/QR/scanner payment not accepted",
+    "reply_en": "We cannot accept UPI QR/scanner payments; payment is only through gift cards.",
+    "reply_hi": "Hum UPI QR/scanner payment accept nahi karte; payment sirf gift card se karna hai.",
+    "trigger": "",
+    "keywords": "upi payment|upi qr|qr payment|scanner payment|upi scanner|qr scanner"
+  },
+  {
+    "intent": "Purchase or payment intent",
+    "reply_en": "Do you use PhonePe?",
+    "reply_hi": "Aap PhonePe use karte ho?",
+    "trigger": "",
+    "keywords": "want to buy|buy this|purchase this|payment karna hai|pay karna hai|purchase payment"
+  },
+  {
+    "intent": "Customer says yes to PhonePe",
+    "reply_en": "",
+    "reply_hi": "",
+    "trigger": "/phonepe",
+    "keywords": "yes phonepe|haan phonepe|i use phonepe|phonepe hai"
+  },
+  {
+    "intent": "PhonePe not possible",
+    "reply_en": "Can you download PhonePe? It will be easier for the payment.",
+    "reply_hi": "Kya aap PhonePe download kar sakte ho? Payment ke liye easier rahega.",
+    "trigger": "/pay",
+    "keywords": "no phonepe|phonepe possible nahi|cannot use phonepe|phonepe nahi hai|phonepe download nahi kar sakta"
+  },
+  {
+    "intent": "Gift card payment",
+    "reply_en": "Yes, gift card se hi payment karna hai.",
+    "reply_hi": "Haan bro, gift card se hi payment karna hai.",
+    "trigger": "",
+    "keywords": "gift card payment|gift card se payment|gift card se pay|gift card"
+  },
+  {
+    "intent": "After payment",
+    "reply_en": "Please send the payment screenshot.",
+    "reply_hi": "Payment ke baad screenshot send kar dena.",
+    "trigger": "",
+    "keywords": "after payment|payment kar diya|paid|payment done|screenshot payment"
+  },
+  {
+    "intent": "Send group link after payment",
+    "reply_en": "",
+    "reply_hi": "",
+    "trigger": "/pay",
+    "keywords": "group link after payment|payment ke baad group link|link after payment|access link after payment"
+  },
+  {
+    "intent": "Telegram Premium or folder limit",
+    "reply_en": "",
+    "reply_hi": "",
+    "trigger": "/premium",
+    "keywords": "telegram premium folder|folder limit|premium folder limit|telegram folder issue"
+  },
+  {
+    "intent": "Final price or how much",
+    "reply_en": "The price is fixed.",
+    "reply_hi": "Price fixed hai.",
+    "trigger": "",
+    "keywords": "final price|how much is it|kitne ka hai|final amount|price kya hai"
+  },
+  {
+    "intent": "Discount request",
+    "reply_en": "Bro, this is a premium course. We can't discount it.",
+    "reply_hi": "Bro, ye premium course hai. Isme discount nahi de sakte.",
+    "trigger": "",
+    "keywords": "discount|discount do|price kam|lower price|discount chahiye"
+  },
+  {
+    "intent": "Validity / time limit",
+    "reply_en": "Lifetime — there is no time limit.",
+    "reply_hi": "Lifetime hai — koi time limit nahi hai.",
+    "trigger": "",
+    "keywords": "validity time limit"
+  },
+  {
+    "intent": "Updates until Mains 2027",
+    "reply_en": "Top Faculty, Pro Pack, and the included Optional are updated till Mains 2027.",
+    "reply_hi": "Top Faculty, Pro Pack aur included Optional Mains 2027 tak update hote rahenge.",
+    "trigger": "",
+    "keywords": "updates till mains 2027|update kab tak|updates kab tak|mains 2027 updates|update duration"
+  },
+  {
+    "intent": "Everything mentioned is included",
+    "reply_en": "Yes, absolutely. Everything mentioned in the list is included.",
+    "reply_hi": "Haan bro, bilkul. List mein jo bhi mentioned hai, sab included hai.",
+    "trigger": "",
+    "keywords": "everything mentioned included|list mein sab included|jo mentioned hai sab|everything in list"
+  },
+  {
+    "intent": "Copyright concern",
+    "reply_en": "There are no copyright issues; everything is safe from copyright.",
+    "reply_hi": "Copyright ka koi issue nahi hai; sab copyright se safe hai.",
+    "trigger": "",
+    "keywords": "copyright issue|copyright safe|copyright problem|legal copyright"
+  },
+  {
+    "intent": "Will lectures disappear or be deleted?",
+    "reply_en": "No, they are safe for lifetime use with no time limit.",
+    "reply_hi": "Nahi bro, safe hain; lifetime use hai, koi time limit nahi hai.",
+    "trigger": "",
+    "keywords": "lectures deleted|lectures disappear|delete ho jayega|access disappear|remove lectures"
+  },
+  {
+    "intent": "Trust or scam concern",
+    "reply_en": "Yes bro, don't worry. You will get access. We are genuine.",
+    "reply_hi": "Haan bro, tension mat lo. Aapko access mil jayega. Hum genuine hain.",
+    "trigger": "",
+    "keywords": "scam|trust|genuine seller|safe to buy|fraud"
+  },
+  {
+    "intent": "Are the lectures recorded?",
+    "reply_en": "Mostly recorded, with a few running/live lectures.",
+    "reply_hi": "Mostly recorded hain, aur kuch running/live lectures bhi hain.",
+    "trigger": "",
+    "keywords": "recorded lectures|recorded or live|live lectures|running lectures|lectures recorded"
+  },
+  {
+    "intent": "Latest or old batch",
+    "reply_en": "Please refer to the mentioned list/image and the demo for the year.",
+    "reply_hi": "",
+    "trigger": "/demoall",
+    "keywords": "latest batch|old batch|latest or old|new batch|old course"
+  },
+  {
+    "intent": "Which year is the course?",
+    "reply_en": "Please refer to the mentioned list/image and the demo for the year.",
+    "reply_hi": "",
+    "trigger": "/demoall",
+    "keywords": "course year|batch year|which year|kaunsa year|kis year ka"
+  },
+  {
+    "intent": "Show demo / sample lecture",
+    "reply_en": "",
+    "reply_hi": "",
+    "trigger": "/demoall",
+    "keywords": "demo|show demo|sample lecture|demo lecture|preview lecture"
+  },
+  {
+    "intent": "Does it include GS?",
+    "reply_en": "Yes, GS is included in both Top Faculty and Pro Pack.",
+    "reply_hi": "Haan bro, GS Top Faculty aur Pro Pack dono mein included hai.",
+    "trigger": "",
+    "keywords": "gs included|does it include gs|gs milega|gs hai|gs included in combo"
+  },
+  {
+    "intent": "One Telegram ID access",
+    "reply_en": "Access is provided on one Telegram ID only.",
+    "reply_hi": "Access sirf ek Telegram ID par diya jata hai.",
+    "trigger": "",
+    "keywords": "one telegram id|single telegram id|one id access|ek telegram id"
+  },
+  {
+    "intent": "Can I use it on laptop?",
+    "reply_en": "Yes, you can use the same Telegram ID on a laptop.",
+    "reply_hi": "Haan bro, same Telegram ID laptop par bhi use kar sakte ho.",
+    "trigger": "",
+    "keywords": "use on laptop|laptop access|laptop telegram|same id laptop"
+  },
+  {
+    "intent": "Use multiple Telegram IDs?",
+    "reply_en": "No, access is provided on one Telegram ID only.",
+    "reply_hi": "Nahi bro, access sirf ek Telegram ID par diya jata hai.",
+    "trigger": "",
+    "keywords": "multiple telegram ids|two telegram ids|more than one id|multiple ids access"
+  },
+  {
+    "intent": "Do I need Telegram Premium?",
+    "reply_en": "Telegram Premium may be needed if Telegram folder/access limits apply.",
+    "reply_hi": "",
+    "trigger": "/premium",
+    "keywords": "need telegram premium|telegram premium required|premium needed|premium zaroori"
+  },
+  {
+    "intent": "Do I get private group access?",
+    "reply_en": "Yes, access is provided through the private premium groups.",
+    "reply_hi": "Haan bro, private premium groups ke through access milta hai.",
+    "trigger": "",
+    "keywords": "private group access|private premium group|group access milega|private group milega"
+  },
+  {
+    "intent": "Can I get access after payment?",
+    "reply_en": "Yes, you will get access after payment.",
+    "reply_hi": "Haan bro, payment ke baad access mil jayega.",
+    "trigger": "",
+    "keywords": "access after payment|payment ke baad access|pay then access|access after pay"
+  },
+  {
+    "intent": "Is Top Faculty a single group?",
+    "reply_en": "Top Faculty is one group with multiple topics, with lectures arranged topic-wise.",
+    "reply_hi": "Top Faculty ek group hai jisme multiple topics hain aur lectures topic-wise arranged hain.",
+    "trigger": "",
+    "keywords": "top faculty single group|top faculty one group|one group top faculty|multiple topics top faculty"
+  },
+  {
+    "intent": "How are Top Faculty lectures arranged?",
+    "reply_en": "Top Faculty lectures are arranged by topics within the Top Faculty group.",
+    "reply_hi": "Top Faculty group ke andar lectures topics ke according arranged hain.",
+    "trigger": "",
+    "keywords": "top faculty arranged|lectures topic wise|topic wise lectures|top faculty topics"
+  },
+  {
+    "intent": "What is included besides Top Faculty in Pro Pack?",
+    "reply_en": "Pro Pack also includes All Coaching GS and one Optional Combo.",
+    "reply_hi": "Pro Pack mein Top Faculty ke saath All Coaching GS aur ek Optional Combo bhi included hai.",
+    "trigger": "",
+    "keywords": "besides top faculty pro pack|pro pack besides top faculty|pro pack extra|what else in pro pack"
+  },
+  {
+    "intent": "Is All Coaching GS included?",
+    "reply_en": "Yes, All Coaching GS is included in Pro Pack.",
+    "reply_hi": "Haan bro, All Coaching GS Pro Pack mein included hai.",
+    "trigger": "",
+    "keywords": "all coaching gs included|all coaching gs pro pack|all coaching included"
+  },
+  {
+    "intent": "Can I buy another Optional?",
+    "reply_en": "Yes, an additional Optional is available for ₹500.",
+    "reply_hi": "Haan bro, additional Optional ₹500 ka available hai.",
+    "trigger": "",
+    "keywords": "buy another optional|additional optional|extra optional|second optional"
+  },
+  {
+    "intent": "Can I see the list of included content?",
+    "reply_en": "Yes, the included content is shown in the list and demo.",
+    "reply_hi": "Haan bro, included content list aur demo mein shown hai.",
+    "trigger": "/demoall",
+    "keywords": "list of included content|included content list|show included list|content list"
+  },
+  {
+    "intent": "I want Top Faculty",
+    "reply_en": "",
+    "reply_hi": "",
+    "trigger": "/topfaculty",
+    "keywords": "want top faculty|top faculty chahiye|top faculty lena hai|top faculty please"
+  },
+  {
+    "intent": "I want Pro Pack",
+    "reply_en": "",
+    "reply_hi": "",
+    "trigger": "/propack",
+    "keywords": "want pro pack|pro pack chahiye|pro pack lena hai|pro combo chahiye"
+  },
+  {
+    "intent": "I want All Combo",
+    "reply_en": "",
+    "reply_hi": "",
+    "trigger": "/allcombo",
+    "keywords": "want all combo|all combo chahiye|all combos|all combo lena hai"
+  },
+  {
+    "intent": "Generic combo price question",
+    "reply_en": "",
+    "reply_hi": "",
+    "trigger": "/allcombo",
+    "keywords": "combo price|combo ka price|combo kitne ka|combo fee|price of combo"
+  },
+  {
+    "intent": "Generic combo details question",
+    "reply_en": "",
+    "reply_hi": "",
+    "trigger": "/allcombo",
+    "keywords": "combo details|combo kya hai|combo mein kya hai|combo provide kya"
+  },
+  {
+    "intent": "Can I get Top Faculty PRE-access?",
+    "reply_en": "If you want, we can provide PRE-access for five minutes to Top Faculty.",
+    "reply_hi": "Agar aap chaho toh Top Faculty ka five-minute PRE-access de sakte hain.",
+    "trigger": "",
+    "keywords": "top faculty pre access|pre access top faculty|top faculty ka pre"
+  },
+  {
+    "intent": "PRE-access duration",
+    "reply_en": "PRE-access is available for five minutes to Top Faculty.",
+    "reply_hi": "Top Faculty ka PRE-access five minutes ka available hai.",
+    "trigger": "",
+    "keywords": "pre access duration|pre kitne minute|five minute pre|5 minute pre|pre access kitne time"
+  },
+  {
+    "intent": "Why should I choose Pro Pack?",
+    "reply_en": "Pro Pack includes Top Faculty + All Coaching GS + one Optional Combo.",
+    "reply_hi": "Pro Pack mein Top Faculty + All Coaching GS + ek Optional Combo included hai.",
+    "trigger": "",
+    "keywords": "why choose pro pack|pro pack kyun|pro pack benefit|pro pack better"
+  },
+  {
+    "intent": "Why should I choose Top Faculty?",
+    "reply_en": "Top Faculty gives the lectures listed in the Top Faculty list.",
+    "reply_hi": "Top Faculty mein Top Faculty list mein mentioned lectures milte hain.",
+    "trigger": "",
+    "keywords": "why choose top faculty|top faculty kyun|top faculty benefit|faculty better"
+  },
+  {
+    "intent": "Is the price negotiable?",
+    "reply_en": "The price is fixed.",
+    "reply_hi": "Price fixed hai.",
+    "trigger": "",
+    "keywords": "price negotiable|can negotiate price|negotiable price|price bargain"
+  }
+]

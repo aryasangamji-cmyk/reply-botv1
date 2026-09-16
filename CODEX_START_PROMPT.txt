@@ -1,0 +1,22 @@
+Read CODEX_HANDOFF_TELEGRAM_AI_BOT.md completely before changing code.
+
+Current production is V34. V35 failed isolated self-test and was NOT installed.
+
+Start by auditing current V34 source and reproducing the regressions. Do not patch production yet.
+
+Priorities:
+1. Generic FAQ must never mutate/rebuild cart or reset negotiation.
+2. Bare words like sab/dono/all/bhi/optional/teacher names are not cart intents.
+3. Use AI intent understanding when meaning is ambiguous.
+4. Preserve ADD/REMOVE/REPLACE semantics and unrelated cart items.
+5. New-target replacement must use the existing matcher with full explicit text, then complete a pending cart edit.
+6. Re-adding old course must prefer recent negotiated price over catalogue price.
+7. Bundle negotiation must use current negotiated item prices.
+8. Payment must receive exact final cart + final negotiated bundle amount.
+9. Preserve matching/payment/combo/reply infrastructure unless inspection proves a minimal change is required.
+
+After source audit, give me:
+- root cause report
+- regression tests that fail on current V34
+- proposed minimal patch plan
+- hash guard / backup / rollback plan
