@@ -883,6 +883,10 @@ async def _cart_intent_with_ai(context, production_db_path: str, chat_id: Any, r
             final_keys = [k for k in final_keys if k not in combo_keys]
         # AI is authoritative for ambiguous multi-course and negative wording;
         # server-side validation below still restricts results to candidates.
+        # Never let an indeterminate AI response clear a valid cart or discard
+        # a clean candidate selection.
+        if action == "NONE" and fallback.get("action") not in {"NONE", ""}:
+            return fallback
         if route and fallback.get("action") in {"REMOVE", "KEEP_ONLY"}:
             return fallback
         if not final_keys and current_keys and action not in {"REMOVE","KEEP_ONLY"}:
