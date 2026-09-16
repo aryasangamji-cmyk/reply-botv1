@@ -749,7 +749,7 @@ def _fallback_cart_intent(raw: str, current_keys: list[str], candidates: list[di
             removed = set(_candidate_mentions(negative_part, candidates))
             final = [k for k in current_keys if k not in removed]
             for k in mentioned:
-                if k not in final:
+                if k not in removed and k not in final:
                     final.append(k)
         else:
             final = list(dict.fromkeys(mentioned))
