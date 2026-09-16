@@ -1101,6 +1101,14 @@ def _sync_selection(production_db_path: str, chat_id: Any, text: str, state: dic
     if not items:
         return state, False
     old = list(state.get("cart") or [])
+    if not old:
+        try:
+            with _con(production_db_path) as db:
+                row = db.execute("SELECT active_targets_json FROM unified_customer_context WHERE chat_id=? LIMIT 1", (str(chat_id),)).fetchone()
+            saved = json.loads(row["active_targets_json"] or "[]") if row else []
+            old = [{"key": str(x.get("key")), "name": str(x.get("name")), "price": _price_int(x.get("price")), "catalog_price": _price_int(x.get("price")), "phrases": []} for x in saved if isinstance(x, dict) and x.get("key") and x.get("name")]
+            if old: state["cart"] = old
+        except Exception: logger.exception("%s active cart recovery failed chat=%s", MARKER, chat_id)
     # Multi-course wording is inherently additive even when the user does not
     # say the literal "add" (for example: "dono", "teeno", "both", "all").
     # Preserve the existing cart so later remove/replace turns have full state.
