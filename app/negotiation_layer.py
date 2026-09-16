@@ -608,6 +608,7 @@ def _load_recent_items(production_db_path: str, chat_id: Any) -> list[dict]:
             "status": str(row["status"] or ""),
             "phrases": phrases,
             "source": "recent",
+            "updated_at": float(row["updated_at"] or 0),
         })
     return out
 
@@ -1105,6 +1106,8 @@ def _sync_selection(production_db_path: str, chat_id: Any, text: str, state: dic
         try:
             recent = _load_recent_items(production_db_path, chat_id)
             if recent:
+                newest = max(float(x.get("updated_at") or 0) for x in recent)
+                recent = [x for x in recent if newest - float(x.get("updated_at") or 0) <= 600]
                 old = [{"key": str(x.get("key") or ""), "name": str(x.get("name") or ""), "price": _price_int(x.get("current_price") or x.get("price")), "catalog_price": _price_int(x.get("catalog_price") or x.get("price")), "phrases": list(x.get("phrases") or [])} for x in recent if x.get("key") and x.get("name")]
             with _con(production_db_path) as db:
                 row = db.execute("SELECT active_targets_json FROM unified_customer_context WHERE chat_id=? LIMIT 1", (str(chat_id),)).fetchone()
