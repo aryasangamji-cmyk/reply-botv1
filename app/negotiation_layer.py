@@ -1103,6 +1103,9 @@ def _sync_selection(production_db_path: str, chat_id: Any, text: str, state: dic
     old = list(state.get("cart") or [])
     if not old:
         try:
+            recent = _load_recent_items(production_db_path, chat_id)
+            if recent:
+                old = [{"key": str(x.get("key") or ""), "name": str(x.get("name") or ""), "price": _price_int(x.get("current_price") or x.get("price")), "catalog_price": _price_int(x.get("catalog_price") or x.get("price")), "phrases": list(x.get("phrases") or [])} for x in recent if x.get("key") and x.get("name")]
             with _con(production_db_path) as db:
                 row = db.execute("SELECT active_targets_json FROM unified_customer_context WHERE chat_id=? LIMIT 1", (str(chat_id),)).fetchone()
             saved = json.loads(row["active_targets_json"] or "[]") if row else []
