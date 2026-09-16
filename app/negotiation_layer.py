@@ -1972,11 +1972,20 @@ async def process_negotiation_layer(update, context, production_db_path: str, te
         # not itself imply add/remove/buy; current message intent still decides.
         ref = _reference_for_turn(production_db_path, chat_id, update, raw)
 
+        # A property/access or price question about an already-known course is
+        # contextual FAQ traffic. Words such as "bhi", "dono", or "sab" may
+        # appear in the question, but they must never trigger catalogue
+        # selection or rebuild the active cart.
+        known_active_faq = bool(
+            (FAQ_RE.search(raw) or PRICE_QUESTION_RE.search(raw))
+            and (state.get("cart") or ref)
+        )
+
         # If the current message explicitly identifies another saved item, let
         # the mature matcher/selection flow own it instead of forcing the older
         # replied target onto the turn.
         explicit_items = []
-        if SELECTION_RE.search(raw) or _looks_like_new_batch_reference(raw):
+        if not known_active_faq and (SELECTION_RE.search(raw) or _looks_like_new_batch_reference(raw)):
             explicit_items = _selection_items(production_db_path, raw)
 
         # NEGOTIATION_LIST_AI_V34: interpret list mutation before reply-target
@@ -1997,12 +2006,15 @@ async def process_negotiation_layer(update, context, production_db_path: str, te
             )
             state = _normalize_policy_state(production_db_path, chat_id, state)
 
-        state, _selection_changed = _sync_selection(
-            production_db_path,
-            chat_id,
-            raw,
-            state,
-        )
+        if known_active_faq:
+            _selection_changed = False
+        else:
+            state, _selection_changed = _sync_selection(
+                production_db_path,
+                chat_id,
+                raw,
+                state,
+            )
         state = _normalize_policy_state(production_db_path, chat_id, state)
 
         if _selection_changed:
