@@ -1106,7 +1106,10 @@ def _sync_selection(production_db_path: str, chat_id: Any, text: str, state: dic
     # say the literal "add" (for example: "dono", "teeno", "both", "all").
     # Preserve the existing cart so later remove/replace turns have full state.
     multi_add = bool(re.search(r"\b(?:dono|teeno|teenon|both|all|sabhi|sare|saare)\b", text, re.I))
-    if old and (ADDITIVE_RE.search(text) or multi_add):
+    explicit_replace = bool(REMOVE_RE.search(text) or REPLACE_RE.search(text) or ONLY_RE.search(text))
+    # Once a negotiation cart exists, a subsequent named course is additive by
+    # default. Replacement requires explicit remove/replace/only wording.
+    if old and (ADDITIVE_RE.search(text) or multi_add or not explicit_replace):
         cart = _merge_selected(old, items)
     else:
         cart = items
