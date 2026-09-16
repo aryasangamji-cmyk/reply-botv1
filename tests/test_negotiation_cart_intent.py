@@ -1,6 +1,6 @@
 import unittest
 
-from app.negotiation_layer import _candidate_mentions, _fallback_cart_intent
+from app.negotiation_layer import _apply_reference_target, _candidate_mentions, _fallback_cart_intent
 
 
 class CartIntentTests(unittest.TestCase):
@@ -52,6 +52,15 @@ class CartIntentTests(unittest.TestCase):
     )
         self.assertEqual(decision["action"], "ADD")
         self.assertEqual(decision["final_keys"], ["batch:jayant_economy", "batch:ayushi_ir"])
+
+    def test_reference_in_bundle_does_not_collapse_cart(self):
+        state = {"cart": [{"key": "a", "name": "A", "price": 300}, {"key": "b", "name": "B", "price": 500}]}
+        updated, changed = _apply_reference_target(
+            "/tmp/negotiation-test.sqlite3", "test-chat", state,
+            {"target_key": "a", "target_name": "A", "target_price": 300},
+        )
+        self.assertFalse(changed)
+        self.assertEqual([x["key"] for x in updated["cart"]], ["a", "b"])
 
 
 if __name__ == "__main__":

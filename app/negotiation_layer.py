@@ -1515,6 +1515,12 @@ def _apply_reference_target(production_db_path: str, chat_id: Any, state: dict, 
         "phrases": [],
     }
     old = list(state.get("cart") or [])
+    # A reply to one card inside a multi-course cart identifies the referenced
+    # message; it must not collapse the active bundle. Cart edits such as
+    # ADD/REMOVE/REPLACE are handled earlier by _handle_cart_edit and can make
+    # an intentional mutation explicitly.
+    if len(old) > 1:
+        return state, False
     if len(old) == 1 and str(old[0].get("key") or "") == str(item["key"]):
         return state, False
     if len(old) == 1 and not key and str(old[0].get("name") or "").casefold() == name.casefold():
@@ -2208,4 +2214,3 @@ async def process_negotiation_layer(update, context, production_db_path: str, te
 
         # Non-FAQ unrelated conversational turns fall through unchanged.
         return False
-
