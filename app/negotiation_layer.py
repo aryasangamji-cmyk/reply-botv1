@@ -668,7 +668,7 @@ def _cart_edit_candidates(production_db_path: str, chat_id: Any, state: dict, ex
             y["catalog_price"] = int(y.get("price") or 0)
             y["current_price"] = int(y.get("price") or 0)
             put(y, "explicit")
-    if ref:
+    if ref and len(cart) <= 1:
         key = str(ref.get("target_key") or "").strip()
         name = str(ref.get("target_name") or ref.get("reference_label") or "").strip()
         price = int(ref.get("current_price") or ref.get("target_price") or 0)
@@ -2018,9 +2018,12 @@ async def process_negotiation_layer(update, context, production_db_path: str, te
         # NEGOTIATION_LIST_AI_V34: interpret list mutation before reply-target
         # switching or legacy one-selection sync. This lets "Ye bhi chahiye"
         # ADD the replied course instead of replacing the active one.
-        state, _cart_edit_handled = await _handle_cart_edit(
-            update, context, production_db_path, chat_id, raw, state, ref, explicit_items
-        )
+        if known_active_faq or faq_only:
+            _cart_edit_handled = False
+        else:
+            state, _cart_edit_handled = await _handle_cart_edit(
+                update, context, production_db_path, chat_id, raw, state, ref, explicit_items
+            )
         if _cart_edit_handled:
             return True
 
