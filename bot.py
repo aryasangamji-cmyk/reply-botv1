@@ -5213,6 +5213,16 @@ async def message_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await show_negotiation_message(update, settings.database_path)
         return
 
+    # NEGOTIATION_FIRST_ROUTER_V35
+    # Resolve contextual/cart turns before numbered-choice state can consume them.
+    _customer_text=str(update.message.text or '')
+    if not is_admin(settings, uid) and _customer_text and len(_customer_text) <= 150:
+        try:
+            if await process_negotiation_layer(update, context, settings.database_path, _customer_text):
+                return
+        except Exception:
+            logger.exception('NEGOTIATION_FIRST_ROUTER_V35 early gate failed chat_id=%s', getattr(getattr(update, 'effective_chat', None), 'id', None))
+
     # TOKEN_SMART_BATCH_SELECTION_V1
     if not is_admin(settings, uid) and update.message.text and context.user_data.get('pending_batch_choices'):
         _sel=_ts_norm(update.message.text)
@@ -5243,18 +5253,6 @@ async def message_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     _customer_text=str(update.message.text or '')
     if len(_customer_text)>150:
         return
-
-    # NEGOTIATION_FIRST_ROUTER_V35
-    # Give the negotiation/cart layer first refusal. It consumes only
-    # contextual, negative, multi-course, reply-follow-up, FAQ, and bargaining
-    # turns; clean exact batch names fall through to the zero-token matcher.
-    try:
-        if await process_negotiation_layer(
-            update, context, settings.database_path, _customer_text
-        ):
-            return
-    except Exception:
-        logger.exception('NEGOTIATION_FIRST_ROUTER_V35 failed chat_id=%s', getattr(getattr(update, 'effective_chat', None), 'id', None))
 
     # Admin/main account is never a customer.
     if is_admin(settings, uid):
