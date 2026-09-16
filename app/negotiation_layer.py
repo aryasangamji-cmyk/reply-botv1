@@ -743,6 +743,11 @@ def _candidate_mentions(raw: str, candidates: list[dict]) -> list[str]:
 
 def _looks_like_cart_edit(raw: str, state: dict, ref: dict | None, explicit_items: list[dict], recent_items: list[dict]) -> bool:
     text = str(raw or "")
+    # Any explicit batch candidates must pass through the AI decision layer,
+    # even for a first-time clean selection. The local resolver only retrieves
+    # candidates and must never execute the selection directly.
+    if explicit_items:
+        return True
     if not (state.get("cart") or recent_items or ref):
         return False
     if NEGOTIATION_RE.search(text) and not re.search(r"\b(?:chahiye|chahie|want|need|add|include|remove|hata|replace|sirf|only|dono|both|teeno)\b", text, re.I):
