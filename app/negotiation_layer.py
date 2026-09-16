@@ -643,6 +643,12 @@ def _cart_edit_candidates(production_db_path: str, chat_id: Any, state: dict, ex
         old = by_key.get(key)
         x = dict(old or {})
         x.update(dict(item))
+        if old and str(old.get("source") or "") in {"recent", "current"} and source == "saved":
+            # Saved context supplies identity only; negotiated ledger/cart
+            # prices remain authoritative for AI cart calculations.
+            x["price"] = int(old.get("price") or item.get("price") or 0)
+            x["current_price"] = int(old.get("current_price") or old.get("price") or 0)
+            x["catalog_price"] = int(old.get("catalog_price") or item.get("price") or 0)
         x["key"] = key
         x["name"] = name
         if old and str(old.get("source") or "") in {"recent", "current"} and source == "explicit":
